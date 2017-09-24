@@ -2,3 +2,8 @@ target
 *.iml
 *.png
 .idea/
+lib
+bin
+.classpath
+.project
+.settings
