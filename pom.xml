@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.scienjus</groupId>
-    <artifactId>smartqq</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>com.github.juzeon</groupId>
+    <artifactId>sweetiebot</artifactId>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>smartqq</name>
+    <name>SweetieBot</name>
     <url>http://maven.apache.org</url>
     
     <!-- Properties -->
@@ -48,6 +48,48 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <plugin>  
+    <groupId>org.apache.maven.plugins</groupId>  
+    <artifactId>maven-jar-plugin</artifactId>  
+    <configuration>  
+    <archive>  
+    <manifest>  
+        <addClasspath>true</addClasspath>  
+        <classpathPrefix>lib/</classpathPrefix>  
+        <mainClass>sb.Gate</mainClass>  
+    </manifest>  
+    <manifestEntries>  
+        <Class-Path>.</Class-Path>  
+    </manifestEntries>  
+    </archive>  
+  
+    <finalName>eventprocessor</finalName>  
+    <!-- <excludes>  
+        <exclude>**/*.properties</exclude>  
+        <exclude>**/*.xml</exclude>  
+    </excludes> -->  
+    </configuration>  
+    </plugin>  
+  
+       <plugin>  
+    <groupId>org.apache.maven.plugins</groupId>  
+    <artifactId>maven-dependency-plugin</artifactId>  
+        <executions>  
+        <execution>  
+            <id>copy-dependencies</id>  
+            <phase>prepare-package</phase>  
+            <goals>  
+            <goal>copy-dependencies</goal>  
+            </goals>  
+            <configuration>  
+            <outputDirectory>${project.build.directory}/lib</outputDirectory>  
+            <overWriteReleases>false</overWriteReleases>  
+            <overWriteSnapshots>false</overWriteSnapshots>  
+            <overWriteIfNewer>true</overWriteIfNewer>  
+            </configuration>  
+            </execution>  
+        </executions>  
+    </plugin>  
         </plugins>
     </build>
 
