@@ -1,9 +1,13 @@
-target
 *.iml
 *.png
 .idea/
-lib
 bin
 .classpath
 .project
 .settings
+target/.DS_Store
+.DS_Store
+target/classes
+lib
+target/maven-archiver
+target/maven-status
