@@ -28,8 +28,10 @@ public class Loadhe {
 		try {
 			List<File> scriptFileList=FileUtils.listFiles("script");
 			for(File scriptFile:scriptFileList){
-				scripts.add(FileUtils.readFile(scriptFile.getPath()));
-				result+="Loadhe: Loaded script "+scriptFile.getName()+"\r\n";
+				if(scriptFile.getName().endsWith(".js")){
+					scripts.add(FileUtils.readFile(scriptFile.getPath()));
+					result+="Loadhe: Loaded script "+scriptFile.getName()+"\r\n";
+				}
 			}
 		} catch (IOException e) {
 			// TODO 自动生成的 catch 块
@@ -89,6 +91,7 @@ public class Loadhe {
 				inv.invokeFunction("onMessage",obj);
 			} catch (Exception e) {
 				// TODO 自动生成的 catch 块
+				System.out.println("脚本内容发生错误："+script);
 				e.printStackTrace();
 			}
 			
