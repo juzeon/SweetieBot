@@ -8,6 +8,6 @@ bin
 target/.DS_Store
 .DS_Store
 target/classes
-lib
+/lib
 target/maven-archiver
 target/maven-status
