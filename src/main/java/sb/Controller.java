@@ -36,6 +36,9 @@ public class Controller {
 		
 	}
 	void dealCommand(Command command){
+		if(loadhe==null){
+			return;
+		}
 		int type=command.getType();
 		System.out.println("UserId:"+command.getUserId()+" 类型："+type+" 内容："+command.getSourceContent());
 		/*if(sb.getQQById(command.getUserId())==new Long("3214508785")){

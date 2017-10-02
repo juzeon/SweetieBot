@@ -30,7 +30,7 @@ public class Loadhe {
 			for(File scriptFile:scriptFileList){
 				if(scriptFile.getName().endsWith(".js")){
 					scripts.add(FileUtils.readFile(scriptFile.getPath()));
-					result+="Loadhe: Loaded script "+scriptFile.getName()+"\r\n";
+					result+="ScriptLoader: Loaded script "+scriptFile.getName()+"\r\n";
 				}
 			}
 		} catch (IOException e) {
@@ -38,7 +38,7 @@ public class Loadhe {
 			e.printStackTrace();
 			result+=e.getMessage()+"\r\n";
 		}
-		result+="Loadhe: "+scripts.size()+" scripts loaded.";
+		result+="ScriptLoader: "+scripts.size()+" scripts loaded.";
 		System.out.println(result);
 		return result;
 	}
@@ -70,12 +70,12 @@ public class Loadhe {
             for(int i=0;i<rdGroups.size();i++){
             	if(group.getName().indexOf(rdGroups.get(i))!=-1){
             		lovedGroups.add(group);
-            		result+="Loadhe: Loaded group named "+group.getName()+" id "+group.getId()+"\r\n";
+            		result+="ScriptLoader: Loaded group named "+group.getName()+" id "+group.getId()+"\r\n";
             		break;
             	}
             }
         }
-        result+="Loadhe: "+lovedGroups.size()+" groups loaded.";
+        result+="ScriptLoader: "+lovedGroups.size()+" groups loaded.";
         System.out.println(result);
         return result;
 	}
