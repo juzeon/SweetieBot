@@ -23,6 +23,8 @@ java -jar eventprocessor.jar
 
 `sb#baidu <搜索词>` 使用`lmbtfy.cn`生成页面并使用`url.cn`缩短。
 
+`sb#emotion <语段>` 使用腾讯语义识别API分析语段的积极度与消极度。
+
 `sb#say <文本>` 命令机器人发送给出的文本内容。
 
 `sb#load script` 重载所有脚本。
@@ -33,6 +35,8 @@ java -jar eventprocessor.jar
 脚本应命名为`<文件名>.js`放置于`script`文件夹下。
 
 脚本必须包含一个且只有一个`onMessage(obj)`函数，`obj`是程序传入脚本的对象。
+
+**如果你发现调用示例脚本时QQ输出乱码，多半是编码问题导致的（因为写代码是在macOS上）。Windows用户请用Notepad++将脚本编码改为`ASCII`**
 
 ### obj对象
 (int)`obj.type` 当前消息类别。1=私聊；2=群聊；3=讨论组。
