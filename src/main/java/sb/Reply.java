@@ -1,7 +1,13 @@
 package sb;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.scienjus.smartqq.client.SmartQQClient;
 
 import net.dongliu.requests.Requests;
@@ -124,6 +130,37 @@ public class Reply {
 					break;
 			}
 			break;
+		case "emotion":
+			if(command.getCommandArgument()!=null){
+				String str=command.getCommandArgument();
+				String source=Requests.get("http://nlp.qq.com/semantic.cgi").text().getBody();
+				Matcher m=Pattern.compile("/public/wenzhi/js/semantic(.*?)\\.js").matcher(source);
+				m.find();
+				String jsURL="http://nlp.qq.com"+m.group();
+				source=Requests.get(jsURL).text().getBody();
+				m=Pattern.compile("/public/wenzhi/api/common_api(\\d+?)\\.php").matcher(source);
+				m.find();
+				String apiURL="http://nlp.qq.com"+m.group();
+				
+				HashMap<String,String> post=new HashMap<String, String>();
+				post.put("api", "12");
+				post.put("body_data","{\"content\":\""+str+"\"}");
+				
+				HashMap<String, String> header=new HashMap<String,String>();
+				header.put("Referer", "http://nlp.qq.com/semantic.cgi");
+				header.put("Cookie","pgv_pvi="+new Random().nextInt()+";");
+				header.put("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
+				
+				String json=Requests.post(apiURL)
+				.headers(header)
+				.forms(post).text().getBody();
+				
+				HashMap<String,String> result=JSON.parseObject(json,new TypeReference<HashMap<String, String>>(){});
+				int negative=(int)(Double.parseDouble((String) result.get("negative"))*100);
+				int positive=(int)(Double.parseDouble((String) result.get("positive"))*100);
+				
+				sendMessage(sendderId, "分析“"+str+"”这句话的结果：\r\n积极度："+positive+"%\r\n消极度："+negative+"%");
+			}
 		}
 		
 	}
